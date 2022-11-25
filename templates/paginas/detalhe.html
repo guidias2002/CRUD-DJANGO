@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    #voltar {
+        font-size: 30px;
+        color: rgb(110,180,84);
+    }
+</style>
+
+<title>Detalhe</title>
+
+<div class="container">
+    <h3 class="float-left">
+        Usuário {{ cadastro.nome }}
+    </h3>
+</div>
+
+<div class="table-responsive">
+
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>nome</th>
+            <th>cpf</th>
+            <th>email</th>
+            <th>telefone</th>
+        </tr>
+
+        <tr>
+            <td>{{cadastro.id}}</td>
+            <td>{{cadastro.nome}}</td>
+            <td>{{cadastro.cpf}}</td>
+            <td>{{cadastro.email}}</td>
+            <td>{{cadastro.telefone}}</td>
+        </tr>
+    </table>
+
+</div>
+
+<div class='text-center'>
+    <a href="{% url 'cadastros' %}"><i id="voltar" class="bi bi-arrow-left-circle"></i></a>
+</div>
+{% endblock %}

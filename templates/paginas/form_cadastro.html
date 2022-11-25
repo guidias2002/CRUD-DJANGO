@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<title>Cadastrar</title>
+
+<div class="container w-75 mt-5 mb-5">
+    <form action="" method="POST">
+        {% csrf_token %}
+
+            {{form.nome | as_crispy_field}}
+
+            {{form.email | as_crispy_field}}
+
+            {{form.cpf | as_crispy_field}}
+
+            {{form.telefone | as_crispy_field}}
+
+
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <button class="btn btn-light"><a href="{% url 'cadastros' %}">Cancelar</a></button>
+    </form>
+
+</div>
+{% endblock %}

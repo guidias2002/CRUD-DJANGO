@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/cadastros.css' %}">
+<title>Cadastros</title>
+
+<div class="container">
+    <div class="row justify-content-between">
+
+        <div class="col-6">
+            <h3>Lista de Clientes registrados</h3>
+        </div>
+
+        <div class="col-6">
+            <a href="{% url 'novo_cadastro' %}" class="btn btn-primary btn-sm float-right">Cadastrar cliente</a>
+        </div>
+
+    </div>
+</div>
+
+<hr>
+
+<div class="table-responsive">
+    <table class="table table-striped" id="tabela-listar">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nome</th>
+                <th>cpf</th>
+                <th>email</th>
+                <th>telefone</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                {% for cadastro in cadastros %}
+                <td>{{cadastro.id}}</td>
+                <td>{{cadastro.nome}}</td>
+                <td>{{cadastro.cpf}}</td>
+                <td>{{cadastro.email}}</td>
+                <td>{{cadastro.telefone}}</td>
+                <td><button class="btn btn-info btn-sm"><a
+                            href="{% url 'detalhe_cadastro' cadastro.id %}">Detalhe</a></button>
+                </td>
+                <td><button class="btn btn-warning btn-sm"><a
+                            href="{% url 'editar_cadastro' cadastro.id %}">Editar</a></button>
+                </td>
+                <td><button class="btn btn-danger btn-sm"><a
+                            href="{% url 'excluir_cadastro' cadastro.id %}">Excluir</a></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#tabela-listar').DataTable({
+            responsive: true,
+            // "bSort": false,
+            "aaSorting": [],
+            "pageLength": 10,
+            "language": {
+                "decimal": "",
+                "emptyTable": "Sem dados disponíveis",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+                "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+                "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "loadingRecords": "A carregar dados...",
+                "processing": "A processar...",
+                "search": "Procurar:",
+                "zeroRecords": "Não foram encontrados resultados",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Seguinte",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": ": ordem crescente",
+                    "sortDescending": ": ordem decrescente"
+                }
+            }
+        });
+
+    });
+
+</script>
+
+{% endblock %}
